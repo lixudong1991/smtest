@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.jdbc.dao.StudentDao">
+    <resultMap id="res" type="Student">
+        <id property="id" column="id" javaType="int"></id>
+        <result property="number" column="number" javaType="int"></result>
+        <result property="name" column="name" javaType="java.lang.String"></result>
+        <result property="age" column="age" javaType="int"></result>
+        <result property="sex" column="sex" javaType="java.lang.String"></result>
+        <result property="birthday" column="birthday" javaType="java.util.Date"></result>
+        <result property="classid" column="cid" javaType="int"></result>
+    </resultMap>
+
+    <select id="findStudentbyid" parameterType="int" resultMap="res">
+        SELECT * FROM studb WHERE id=#{id}
+    </select>
+    <!--插入数据并获取主键值-->
+    <insert id="addStudent" useGeneratedKeys="true" keyProperty="id" parameterType="Student">
+        INSERT INTO studb(number,name,age,sex,birthday,cid) VALUES (#{number},#{name},#{age},#{sex},#{birthday},#{classid})
+    </insert>
+
+</mapper>
